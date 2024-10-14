@@ -1,0 +1,75 @@
+2024/09/25 19:10:47 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"parse token err: token has invalid claims: token is expired","time":1727262647}
+2024/09/25 19:41:00 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"error: websocket: close 1005 (no status)","time":1727264460}
+2024/09/25 19:41:01 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"err: sql: no rows in result set","time":1727264461}
+2024/09/25 19:41:01 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"err: sql: no rows in result set","time":1727264461}
+2024/09/25 19:44:30 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"Client inactive for too long, closing connection","time":1727264670}
+2024/09/25 21:02:39 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"error: websocket: close 1005 (no status)","time":1727269359}
+2024/09/25 21:05:25 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"Client inactive for too long, closing connection","time":1727269525}
+2024/09/25 21:25:39 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"error: websocket: close 1005 (no status)","time":1727270739}
+2024/09/25 21:25:41 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"err: sql: no rows in result set","time":1727270741}
+2024/09/25 21:25:41 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"err: sql: no rows in result set","time":1727270741}
+2024/09/25 21:25:42 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"err: sql: no rows in result set","time":1727270742}
+2024/09/25 21:25:42 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"err: sql: no rows in result set","time":1727270742}
+2024/09/25 21:26:04 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"err: sql: no rows in result set","time":1727270764}
+2024/09/25 21:26:04 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"err: sql: no rows in result set","time":1727270764}
+2024/09/25 21:26:32 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"error: websocket: close 1005 (no status)","time":1727270792}
+2024/09/25 21:26:37 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"err: sql: no rows in result set","time":1727270797}
+2024/09/25 21:26:37 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"err: sql: no rows in result set","time":1727270797}
+2024/09/25 21:26:38 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"err: sql: no rows in result set","time":1727270798}
+2024/09/25 21:26:38 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"err: sql: no rows in result set","time":1727270798}
+2024/09/25 21:26:40 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"error: websocket: close 1005 (no status)","time":1727270800}
+2024/09/25 21:26:42 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"err: sql: no rows in result set","time":1727270802}
+2024/09/25 21:26:42 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"err: sql: no rows in result set","time":1727270802}
+2024/09/25 21:26:43 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"err: sql: no rows in result set","time":1727270803}
+2024/09/25 21:26:43 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"err: sql: no rows in result set","time":1727270803}
+2024/09/25 21:26:57 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"error: websocket: close 1005 (no status)","time":1727270817}
+2024/09/25 21:28:39 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"Client inactive for too long, closing connection","time":1727270919}
+2024/09/25 21:29:07 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"Client inactive for too long, closing connection","time":1727270947}
+2024/09/25 21:29:40 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"Client inactive for too long, closing connection","time":1727270980}
+2024/09/25 21:29:57 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"Client inactive for too long, closing connection","time":1727270997}
+2024/09/25 21:30:53 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"error: websocket: close 1005 (no status)","time":1727271053}
+2024/09/25 21:30:55 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"err: sql: no rows in result set","time":1727271055}
+2024/09/25 21:30:55 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"err: sql: no rows in result set","time":1727271055}
+2024/09/25 21:30:57 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"error: websocket: close 1005 (no status)","time":1727271057}
+2024/09/25 21:30:58 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"err: sql: no rows in result set","time":1727271058}
+2024/09/25 21:30:58 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"err: sql: no rows in result set","time":1727271058}
+2024/09/25 21:31:40 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"error: websocket: close 1005 (no status)","time":1727271100}
+2024/09/25 21:31:42 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"err: sql: no rows in result set","time":1727271102}
+2024/09/25 21:31:42 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"err: sql: no rows in result set","time":1727271102}
+2024/09/25 21:32:04 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"error: websocket: close 1005 (no status)","time":1727271124}
+2024/09/25 21:33:40 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"error: websocket: close 1005 (no status)","time":1727271220}
+2024/09/25 21:33:53 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"Client inactive for too long, closing connection","time":1727271233}
+2024/09/25 21:33:56 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"Client inactive for too long, closing connection","time":1727271236}
+2024/09/25 21:34:39 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"Client inactive for too long, closing connection","time":1727271279}
+2024/09/25 21:35:02 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"Client inactive for too long, closing connection","time":1727271302}
+2024/09/25 21:36:32 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"Client inactive for too long, closing connection","time":1727271392}
+2024/09/25 21:38:00 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"err: sql: no rows in result set","time":1727271480}
+2024/09/25 21:38:00 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"err: sql: no rows in result set","time":1727271480}
+2024/09/25 22:22:17 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"parse token err: token has invalid claims: token is expired","time":1727274137}
+2024/09/25 22:28:11 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"error: websocket: close 1005 (no status)","time":1727274491}
+2024/09/25 22:28:12 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"error: websocket: close 1005 (no status)","time":1727274492}
+2024/09/25 22:28:44 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"parse token err: token is malformed: token contains an invalid number of segments","time":1727274524}
+2024/09/25 22:28:49 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"error: websocket: close 1005 (no status)","time":1727274529}
+2024/09/25 22:28:57 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"error: websocket: close 1005 (no status)","time":1727274537}
+2024/09/25 22:30:52 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"error: websocket: close 1005 (no status)","time":1727274652}
+2024/09/25 22:31:06 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"error: websocket: close 1005 (no status)","time":1727274666}
+2024/09/25 22:31:10 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"Client inactive for too long, closing connection","time":1727274670}
+2024/09/25 22:31:11 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"Client inactive for too long, closing connection","time":1727274671}
+2024/09/25 22:31:47 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"Client inactive for too long, closing connection","time":1727274707}
+2024/09/25 22:31:55 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"Client inactive for too long, closing connection","time":1727274715}
+2024/09/25 22:33:41 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"Client inactive for too long, closing connection","time":1727274821}
+2024/09/25 22:34:03 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"Client inactive for too long, closing connection","time":1727274843}
+2024/09/25 22:34:28 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"Client inactive for too long, closing connection","time":1727274868}
+2024/09/25 22:49:44 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"error: websocket: close 1005 (no status)","time":1727275784}
+2024/09/25 22:52:43 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"Client inactive for too long, closing connection","time":1727275963}
+2024/09/25 22:53:40 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"error: websocket: close 1005 (no status)","time":1727276020}
+2024/09/25 22:53:44 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"error: websocket: close 1005 (no status)","time":1727276024}
+2024/09/25 22:56:39 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"Client inactive for too long, closing connection","time":1727276199}
+2024/09/25 22:56:40 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"error: websocket: close 1005 (no status)","time":1727276200}
+2024/09/25 22:56:42 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"Client inactive for too long, closing connection","time":1727276202}
+2024/09/25 22:59:17 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"Client inactive for too long, closing connection","time":1727276357}
+2024/10/14 16:21:30 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"parse token err: token has invalid claims: token is expired","time":1728894090}
+2024/10/14 16:22:18 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"error: websocket: close 1005 (no status)","time":1728894138}
+2024/10/14 16:22:24 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"error: websocket: close 1005 (no status)","time":1728894144}
+2024/10/14 16:25:18 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"Client inactive for too long, closing connection","time":1728894318}
+2024/10/14 16:25:22 {"callers":["/Users/felixie/gopath/src/dsxg666/web-tool/main.go: 25 main.init.0"],"level":"error","message":"Client inactive for too long, closing connection","time":1728894322}
