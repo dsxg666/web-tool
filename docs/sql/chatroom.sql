@@ -8,6 +8,7 @@ CREATE TABLE `messages`
     `created_at`  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4;
+
 SELECT *
 FROM (SELECT *
       FROM `messages`
