@@ -20,7 +20,6 @@ func NewRouter() *gin.Engine {
 
 	authorizedGroup := r.Group("/api/auth")
 	authorizedGroup.Use(middleware.AuthMiddleware())
-	authorizedGroup.Use(middleware.LimitMiddleware())
 	{
 		blog := api.NewBlog()
 		blogGroup := authorizedGroup.Group("blog")
@@ -114,7 +113,6 @@ func NewRouter() *gin.Engine {
 
 	base := api.NewBase()
 	baseGroup := r.Group("/api/base")
-	baseGroup.Use(middleware.LimitMiddleware())
 	{
 		baseGroup.POST("/loginByPassword", base.LoginByPassword)
 		baseGroup.POST("/loginByCode", base.LoginByCode)

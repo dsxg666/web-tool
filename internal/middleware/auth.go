@@ -35,14 +35,3 @@ func AuthMiddleware() gin.HandlerFunc {
 		}
 	}
 }
-
-func LimitMiddleware() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		global.Logger.Infof("%s try to access website", c.Request.Host)
-		if c.Request.Host != "http://121.196.245.107" {
-			c.AbortWithStatus(http.StatusForbidden)
-			return
-		}
-		c.Next()
-	}
-}
