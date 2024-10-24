@@ -21,7 +21,7 @@ Email:
   Host: smtp.qq.com
   Port: 465
   UserName: 1873887255@qq.com
-  Password: xx
+  Password: xxx
   IsSSL: true
   From: 1873887255@qq.com
 JwtToken:
