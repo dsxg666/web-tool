@@ -1,5 +1,5 @@
 #!/bin/bash
-pkill notebook
-rm -rf ./notebook
-go build -o notebook main.go
-nohup ./notebook &
+pkill tool
+rm -rf ./tool
+go build -o tool main.go
+nohup ./tool &
