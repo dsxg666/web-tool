@@ -1,8 +1,10 @@
 package model
 
 import (
+	"fmt"
 	"github.com/dsxg666/web-tool/global"
 	"github.com/dsxg666/web-tool/pkg/util"
+	"strings"
 )
 
 type Posts struct {
@@ -24,6 +26,63 @@ type PostsDTO struct {
 	Title    string `json:"title"`
 	Content  string `json:"content"`
 	Category string `json:"category"`
+}
+
+func (p *PostsDTO) GetFavoriteAndPublicIds(ids []string) []string {
+	placeholders := make([]string, len(ids))
+	args := make([]interface{}, len(ids))
+	for i, id := range ids {
+		placeholders[i] = "?"
+		args[i] = id
+	}
+	sql := fmt.Sprintf("SELECT `id` FROM `posts` WHERE `is_public` = '1' AND id IN (%s)", strings.Join(placeholders, ", "))
+	rows, err := global.Database.DbHandle.Query(sql, args...)
+	if err != nil {
+		global.Logger.Errorf("GetFavoriteAndPublicIds list %v", err)
+		return nil
+	}
+	defer rows.Close()
+
+	var idArr []string
+	for rows.Next() {
+		var temp string
+		err = rows.Scan(&temp)
+		if err != nil {
+			global.Logger.Errorf("Scan %v", err)
+		}
+		idArr = append(idArr, temp)
+	}
+
+	return idArr
+}
+
+func (p *PostsDTO) ListByIds(ids []string) []*Posts {
+	placeholders := make([]string, len(ids))
+	args := make([]interface{}, len(ids))
+	for i, id := range ids {
+		placeholders[i] = "?"
+		args[i] = id
+	}
+	sql := fmt.Sprintf("SELECT * FROM `posts` WHERE id IN (%s)", strings.Join(placeholders, ", "))
+	rows, err := global.Database.DbHandle.Query(sql, args...)
+	if err != nil {
+		global.Logger.Errorf("Posts list %v", err)
+		return nil
+	}
+	defer rows.Close()
+
+	var ps []*Posts
+	for rows.Next() {
+		var temp Posts
+		err = rows.Scan(&temp.Id, &temp.UserId, &temp.Title, &temp.Content, &temp.Category, &temp.ViewCount,
+			&temp.IsPublic, &temp.PublishedAt, &temp.CreatedAt, &temp.UpdatedAt)
+		if err != nil {
+			global.Logger.Errorf("List scan %v", err)
+		}
+		ps = append(ps, &temp)
+	}
+
+	return ps
 }
 
 func (p *PostsDTO) Update() {

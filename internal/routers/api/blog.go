@@ -77,14 +77,12 @@ func (Blog) GetFavoritePostList(c *gin.Context) {
 
 	f := &model.Favorites{UserId: userId}
 	postIdList := f.List((temp.CurrentPage - 1) * 100)
-	var postList []*model.Posts
-	for _, v := range postIdList {
-		tempP := &model.PostsDTO{Id: v}
-		if tempP.IsExistAndValid2() {
-			postList = append(postList, tempP.GetById())
-		}
+
+	tempP := &model.PostsDTO{}
+	ids := tempP.GetFavoriteAndPublicIds(postIdList)
+	if len(postIdList) > 0 {
+		c.JSON(http.StatusOK, result.SuccessWithData(tempP.ListByIds(ids)))
 	}
-	c.JSON(http.StatusOK, result.SuccessWithData(postList))
 }
 
 func (Blog) GetFavoritesTotalCount(c *gin.Context) {

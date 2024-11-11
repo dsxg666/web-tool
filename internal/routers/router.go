@@ -21,6 +21,16 @@ func NewRouter() *gin.Engine {
 	authorizedGroup := r.Group("/api/auth")
 	authorizedGroup.Use(middleware.AuthMiddleware())
 	{
+		music := api.NewMusic()
+		musicGroup := authorizedGroup.Group("/music")
+		{
+			musicGroup.POST("/list", music.List)
+			musicGroup.POST("/favoriteList", music.FavoriteList)
+			musicGroup.POST("/favorite", music.Favorite)
+			musicGroup.POST("/cancelFavorite", music.CancelFavorite)
+			musicGroup.POST("/listByFavorite", music.ListByFavorite)
+		}
+
 		blog := api.NewBlog()
 		blogGroup := authorizedGroup.Group("blog")
 		{

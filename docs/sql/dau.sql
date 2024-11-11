@@ -4,7 +4,7 @@ CREATE TABLE `dau`
 (
     `id`          INT AUTO_INCREMENT PRIMARY KEY,
     `user_id`   VARCHAR(10),
-    `user_ip` VARCHAR(10),
+    `user_ip` VARCHAR(100),
     `created_at`  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4;
