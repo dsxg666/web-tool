@@ -11,13 +11,15 @@ import (
 type CustomClaims struct {
 	UserId   string `json:"userId"`
 	Username string `json:"username"`
+	Path     string `json:"path"`
 	jwt.RegisteredClaims
 }
 
-func NewClaims(userId, username string) CustomClaims {
+func NewClaims(userId, username, path string) CustomClaims {
 	return CustomClaims{
 		UserId:   userId,
 		Username: username,
+		Path:     path,
 		RegisteredClaims: jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Second * global.JwtTokenSetting.ExpirationTime)),
 			IssuedAt:  jwt.NewNumericDate(time.Now()),

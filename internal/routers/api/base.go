@@ -38,7 +38,7 @@ func (Base) LoginByPassword(c *gin.Context) {
 	if userLoginByPasswordDTO.IsEmailExist() {
 		if userLoginByPasswordDTO.IsCorrectPassword() {
 			user := userLoginByPasswordDTO.GetUser()
-			claims := jwt.NewClaims(user.Id, user.Username)
+			claims := jwt.NewClaims(user.Id, user.Username, user.Path)
 			token, err := jwt.NewJwtToken(claims)
 			if err != nil {
 				global.Logger.Error("Error creating token: ", err)
@@ -72,7 +72,7 @@ func (Base) LoginByCode(c *gin.Context) {
 		codeDTO := &model.CodeDTO{Email: userLoginByCodeDTO.Email, Code: userLoginByCodeDTO.Code}
 		if codeDTO.IsValidVerificationCode() {
 			user := userLoginByCodeDTO.GetUser()
-			claims := jwt.NewClaims(user.Id, user.Username)
+			claims := jwt.NewClaims(user.Id, user.Username, user.Path)
 			token, err := jwt.NewJwtToken(claims)
 			if err != nil {
 				global.Logger.Error("Error creating token: ", err)
@@ -107,13 +107,20 @@ func (Base) Register(c *gin.Context) {
 	} else {
 		codeDTO := &model.CodeDTO{Email: userRegisterDTO.Email, Code: userRegisterDTO.Code}
 		if codeDTO.IsValidRegisterCode() {
+			// Set encrypt password
 			hashPass, err := encrypt.HashPassword(userRegisterDTO.Password)
 			if err != nil {
 				global.Logger.Errorf("err: %v", err)
 			}
 			userRegisterDTO.Password = hashPass
+
+			// Add random path
+			userRegisterDTO.Path = util.RandomString(6)
+
+			// Add User
 			lastId := userRegisterDTO.Add()
 
+			// Dir work
 			wd, err := os.Getwd()
 			if err != nil {
 				global.Logger.Errorf("Failed to get working directory err: %v", err)
@@ -133,7 +140,7 @@ func (Base) Register(c *gin.Context) {
 
 			c.JSON(http.StatusOK, result.SuccessWithMessage("Registered successfully.", ""))
 		} else {
-			c.JSON(http.StatusOK, result.OperateError("Valid register code.", ""))
+			c.JSON(http.StatusOK, result.OperateError("Invalid register code.", ""))
 		}
 	}
 }

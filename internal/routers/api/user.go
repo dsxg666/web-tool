@@ -79,6 +79,23 @@ func (User) ModifyUsername(c *gin.Context) {
 	c.JSON(http.StatusOK, result.Success)
 }
 
+func (User) ModifyPath(c *gin.Context) {
+	var userModifyDTO model.UserModifyDTO
+
+	if err := c.ShouldBindJSON(&userModifyDTO); err != nil {
+		global.Logger.Errorf("err: %v", err)
+		c.JSON(http.StatusBadRequest, result.InvalidRequestData)
+		return
+	}
+
+	if userModifyDTO.IsPathExist() {
+		c.JSON(http.StatusOK, result.OperateError("The path already exists.", ""))
+	} else {
+		userModifyDTO.ModifyPath()
+		c.JSON(http.StatusOK, result.Success)
+	}
+}
+
 func (User) UploadAvatar(c *gin.Context) {
 	file, err := c.FormFile("file")
 	if err != nil {

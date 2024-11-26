@@ -1,15 +1,40 @@
 package routers
 
 import (
+	"context"
 	_ "github.com/dsxg666/web-tool/docs"
+	"github.com/dsxg666/web-tool/global"
 	"github.com/dsxg666/web-tool/internal/middleware"
 	"github.com/dsxg666/web-tool/internal/routers/api"
 	"github.com/gin-gonic/gin"
+	"github.com/redis/go-redis/v9"
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
+var rdb *redis.Client
+var ctx = context.Background()
+
+// 初始化Redis客户端
+func initRedis() {
+	rdb = redis.NewClient(&redis.Options{
+		Addr:     "121.196.245.107:6379", // Redis的地址
+		Password: "dashenxiangge",        // Redis密码，如果没有设置可以为空
+		DB:       0,                      // 默认DB
+	})
+
+	// 测试连接
+	_, err := rdb.Ping(ctx).Result()
+	if err != nil {
+		global.Logger.Fatalf("Redis连接失败: %v", err)
+	} else {
+		global.Logger.Info("Redis连接成功")
+	}
+}
+
 func NewRouter() *gin.Engine {
+	initRedis()
+
 	r := gin.New()
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
@@ -17,10 +42,20 @@ func NewRouter() *gin.Engine {
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 
 	r.Use(middleware.CorsMiddleware())
+	r.Use(func(c *gin.Context) {
+		c.Set("rdb", rdb) // 将Redis客户端传递到请求上下文中
+		c.Next()
+	})
 
 	authorizedGroup := r.Group("/api/auth")
 	authorizedGroup.Use(middleware.AuthMiddleware())
 	{
+		game := api.NewGame()
+		gameGroup := authorizedGroup.Group("/game")
+		{
+			gameGroup.POST("/aa", game.LD)
+		}
+
 		music := api.NewMusic()
 		musicGroup := authorizedGroup.Group("/music")
 		{
@@ -77,6 +112,7 @@ func NewRouter() *gin.Engine {
 			userGroup.POST("/modifyEmail", user.ModifyEmail)
 			userGroup.POST("/modifyPassword", user.ModifyPassword)
 			userGroup.POST("/modifyUsername", user.ModifyUsername)
+			userGroup.POST("/modifyPath", user.ModifyPath)
 			userGroup.POST("/uploadAvatar", user.UploadAvatar)
 		}
 

@@ -12,6 +12,7 @@ type User struct {
 	Password      string `json:"password"`
 	Email         string `json:"email"`
 	Avatar        string `json:"avatar"`
+	Path          string `json:"path"`
 	EmailUpdateAt string `json:"emailUpdateAt"`
 	CreatedAt     string `json:"createdAt"`
 	UpdatedAt     string `json:"updatedAt"`
@@ -22,6 +23,7 @@ type UserRegisterDTO struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
 	Code     string `json:"code"`
+	Path     string `json:"path"`
 }
 
 type UserLoginByPasswordDTO struct {
@@ -50,6 +52,17 @@ type UserModifyDTO struct {
 	Username      string `json:"username"`
 	Password      string `json:"password"`
 	Avatar        string `json:"avatar"`
+	Path          string `json:"path"`
+}
+
+func (u *UserModifyDTO) IsPathExist() bool {
+	sql := "SELECT COUNT(*) AS count FROM `users` WHERE `path` = ?;"
+	var count int
+	err := global.Database.DbHandle.QueryRow(sql, u.Path).Scan(&count)
+	if err != nil {
+		global.Logger.Errorf("err: %v", err)
+	}
+	return count > 0
 }
 
 func (u *UserModifyDTO) ModifyAvatar() {
@@ -84,6 +97,14 @@ func (u *UserModifyDTO) ModifyPassword() {
 	}
 }
 
+func (u *UserModifyDTO) ModifyPath() {
+	sql := "UPDATE `users` SET `path` = ? WHERE `id` = ?;"
+	_, err := global.Database.DbHandle.Exec(sql, u.Path, u.Id)
+	if err != nil {
+		global.Logger.Errorf("[user] modify path error: %v", err)
+	}
+}
+
 func (u *UserModifyDTO) IsEmailExist() bool {
 	sql := "SELECT COUNT(*) AS count FROM `users` WHERE `email` = ?;"
 	var count int
@@ -98,7 +119,7 @@ func (u *UserIdDTO) GetById() *User {
 	sql := "SELECT * FROM `users` WHERE `id` = ?;"
 	var user User
 	err := global.Database.DbHandle.QueryRow(sql, u.Id).Scan(&user.Id, &user.Username, &user.Password, &user.Email,
-		&user.Avatar, &user.EmailUpdateAt, &user.CreatedAt, &user.UpdatedAt)
+		&user.Avatar, &user.Path, &user.EmailUpdateAt, &user.CreatedAt, &user.UpdatedAt)
 	if err != nil {
 		global.Logger.Errorf("err: %v", err)
 	}
@@ -126,8 +147,8 @@ func (u *UserAvatarDTO) GetUser() *User {
 }
 
 func (u *UserRegisterDTO) Add() string {
-	sql := "INSERT INTO `users` (`username`, `email`, `password`) VALUES (?, ?, ?);"
-	res, err := global.Database.DbHandle.Exec(sql, u.Username, u.Email, u.Password)
+	sql := "INSERT INTO `users` (`username`, `email`, `password`, `path`) VALUES (?, ?, ?, ?);"
+	res, err := global.Database.DbHandle.Exec(sql, u.Username, u.Email, u.Password, u.Path)
 	if err != nil {
 		global.Logger.Errorf("err: %v", err)
 	}
@@ -176,9 +197,9 @@ func (u *UserLoginByPasswordDTO) IsEmailExist() bool {
 }
 
 func (u *UserLoginByPasswordDTO) GetUser() *User {
-	sql := "SELECT `id`, `username` FROM `users` WHERE `email` = ?;"
+	sql := "SELECT `id`, `username`, `path` FROM `users` WHERE `email` = ?;"
 	var user User
-	err := global.Database.DbHandle.QueryRow(sql, u.Email).Scan(&user.Id, &user.Username)
+	err := global.Database.DbHandle.QueryRow(sql, u.Email).Scan(&user.Id, &user.Username, &user.Path)
 	if err != nil {
 		global.Logger.Errorf("err: %v", err)
 	}
@@ -186,9 +207,9 @@ func (u *UserLoginByPasswordDTO) GetUser() *User {
 }
 
 func (u *UserLoginByCodeDTO) GetUser() *User {
-	sql := "SELECT `id`, `username` FROM `users` WHERE `email` = ?;"
+	sql := "SELECT `id`, `username`, `path` FROM `users` WHERE `email` = ?;"
 	var user User
-	err := global.Database.DbHandle.QueryRow(sql, u.Email).Scan(&user.Id, &user.Username)
+	err := global.Database.DbHandle.QueryRow(sql, u.Email).Scan(&user.Id, &user.Username, &user.Path)
 	if err != nil {
 		global.Logger.Errorf("err: %v", err)
 	}

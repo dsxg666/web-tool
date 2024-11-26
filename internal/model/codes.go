@@ -36,7 +36,7 @@ func (c *CodeDTO) IsValidRegisterCode() bool {
 	var count int
 	err := global.Database.DbHandle.QueryRow(sql, c.Email, c.Code, "1").Scan(&count)
 	if err != nil {
-		global.Logger.Errorf("err: %v", err)
+		global.Logger.Errorf("IsValidRegisterCode err: %v", err)
 	}
 	return count > 0
 }
