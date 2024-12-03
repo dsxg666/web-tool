@@ -3,11 +3,12 @@ Server:
   HttpPort: 8000
   ReadTimeout: 60
   WriteTimeout: 60
+  FrontendHost: http://localhost:5173
 App:
   LogSavePath: storage/logs
   LogFileName: app
   LogFileExtension: .log
-Database:
+MySQL:
   DBType: mysql
   Username: root
   Password: root
@@ -27,3 +28,7 @@ Email:
 JwtToken:
   SecretKey: xx
   ExpirationTime: 43200
+Redis:
+  Host: 121.196.245.107:6379
+  Password: dashenxiangge
+  DB: 0
