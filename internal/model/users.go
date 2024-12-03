@@ -215,3 +215,13 @@ func (u *UserLoginByCodeDTO) GetUser() *User {
 	}
 	return &user
 }
+
+func (u *UserRegisterDTO) GetUser() *User {
+	sql := "SELECT `id`, `username`, `path` FROM `users` WHERE `email` = ?;"
+	var user User
+	err := global.Database.DbHandle.QueryRow(sql, u.Email).Scan(&user.Id, &user.Username, &user.Path)
+	if err != nil {
+		global.Logger.Errorf("err: %v", err)
+	}
+	return &user
+}
