@@ -68,7 +68,7 @@ func setupSetting() error {
 	if err != nil {
 		return err
 	}
-	err = s.ReadSection("Database", &global.DatabaseSetting)
+	err = s.ReadSection("MySQL", &global.MySQLSetting)
 	if err != nil {
 		return err
 	}
@@ -77,6 +77,10 @@ func setupSetting() error {
 		return err
 	}
 	err = s.ReadSection("JwtToken", &global.JwtTokenSetting)
+	if err != nil {
+		return err
+	}
+	err = s.ReadSection("Redis", &global.RedisSetting)
 	if err != nil {
 		return err
 	}
@@ -96,7 +100,7 @@ func setupLogger() error {
 }
 
 func setupDatabase() error {
-	databaseSetting := global.DatabaseSetting
+	databaseSetting := global.MySQLSetting
 	dbHandle, err := sql.Open(databaseSetting.DBType, fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=%s&parseTime=%t&loc=Local",
 		databaseSetting.UserName,
 		databaseSetting.Password,
@@ -109,8 +113,8 @@ func setupDatabase() error {
 		return err
 	}
 
-	dbHandle.SetMaxOpenConns(global.DatabaseSetting.MaxOpenConns)
-	dbHandle.SetMaxIdleConns(global.DatabaseSetting.MaxIdleConns)
+	dbHandle.SetMaxOpenConns(global.MySQLSetting.MaxOpenConns)
+	dbHandle.SetMaxIdleConns(global.MySQLSetting.MaxIdleConns)
 
 	global.Database = &db.Database{
 		DbHandle: dbHandle,
