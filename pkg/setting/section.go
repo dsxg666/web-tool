@@ -7,6 +7,7 @@ type ServerSetting struct {
 	HttpPort     string
 	ReadTimeout  time.Duration
 	WriteTimeout time.Duration
+	FrontendHost string
 }
 
 type AppSetting struct {
@@ -15,7 +16,7 @@ type AppSetting struct {
 	LogFileExtension string
 }
 
-type DatabaseSetting struct {
+type MySQLSetting struct {
 	DBType       string
 	UserName     string
 	Password     string
@@ -39,4 +40,10 @@ type EmailSetting struct {
 type JwtTokenSetting struct {
 	SecretKey      string
 	ExpirationTime time.Duration
+}
+
+type RedisSetting struct {
+	Host     string
+	Password string
+	DB       int
 }
