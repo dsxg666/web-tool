@@ -12,15 +12,12 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
-var rdb *redis.Client
-var ctx = context.Background()
-
-// 初始化Redis客户端
-func initRedis() {
-	rdb = redis.NewClient(&redis.Options{
-		Addr:     "121.196.245.107:6379", // Redis的地址
-		Password: "dashenxiangge",        // Redis密码，如果没有设置可以为空
-		DB:       0,                      // 默认DB
+func NewRouter() *gin.Engine {
+	ctx := context.Background()
+	rdb := redis.NewClient(&redis.Options{
+		Addr:     global.RedisSetting.Host,     // Redis的地址
+		Password: global.RedisSetting.Password, // Redis密码，如果没有设置可以为空
+		DB:       global.RedisSetting.DB,       // 默认DB
 	})
 
 	// 测试连接
@@ -30,15 +27,11 @@ func initRedis() {
 	} else {
 		global.Logger.Info("Redis连接成功")
 	}
-}
-
-func NewRouter() *gin.Engine {
-	initRedis()
 
 	r := gin.New()
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
-
+	r.LoadHTMLGlob("templates/**/*")
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 
 	r.Use(middleware.CorsMiddleware())
@@ -170,6 +163,8 @@ func NewRouter() *gin.Engine {
 		baseGroup.GET("/getGroupAvatar/:filename", base.GetGroupAvatar)
 		baseGroup.GET("/getTodolistImg/:filename", base.GetTodolistImg)
 		baseGroup.GET("/getBlogImg/:filename", base.GetBlogImg)
+		baseGroup.GET("/loginByGithub", base.LoginByGithub)
+		baseGroup.GET("/callback", base.Callback)
 	}
 
 	return r
