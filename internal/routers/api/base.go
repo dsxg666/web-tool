@@ -1,7 +1,11 @@
 package api
 
 import (
+	"context"
+	"encoding/json"
 	"fmt"
+	"golang.org/x/oauth2"
+	"golang.org/x/oauth2/github"
 	"os"
 	"path/filepath"
 
@@ -14,6 +18,17 @@ import (
 	"github.com/dsxg666/web-tool/pkg/util"
 	"github.com/gin-gonic/gin"
 	"net/http"
+)
+
+var (
+	oauthConfig = &oauth2.Config{
+		ClientID:     "Ov23liKsjwU6r7hmHYar",                     // 替换为你的 GitHub Client ID
+		ClientSecret: "111bf2c77917b4b0afbcb14a9989ce4e5ca4e5c7", // 替换为你的 GitHub Client Secret
+		RedirectURL:  "http://localhost:8000/api/base/callback",
+		Scopes:       []string{"read:user"},
+		Endpoint:     github.Endpoint,
+	}
+	state = "random_state_string" // 防止 CSRF，可以随机生成并验证
 )
 
 type Base struct{}
@@ -56,6 +71,112 @@ func (Base) LoginByPassword(c *gin.Context) {
 		}
 	} else {
 		c.JSON(http.StatusOK, result.OperateError("The email address could not be recognized.", ""))
+	}
+}
+
+// LoginByGithub 跳转到 GitHub 授权页面
+func (Base) LoginByGithub(c *gin.Context) {
+	url := oauthConfig.AuthCodeURL(state, oauth2.AccessTypeOffline)
+	c.Redirect(http.StatusFound, url)
+}
+
+// Callback 处理 GitHub 回调
+func (Base) Callback(c *gin.Context) {
+	// 验证 state 是否匹配
+	if c.Query("state") != state {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid state"})
+		return
+	}
+
+	// 使用授权码获取访问令牌
+	code := c.Query("code")
+	token, err := oauthConfig.Exchange(context.Background(), code)
+	if err != nil {
+		global.Logger.Errorf("Exchange error: %v", err)
+		c.Redirect(http.StatusFound, global.ServerSetting.FrontendHost)
+		return
+	}
+
+	// 使用访问令牌获取用户信息
+	client := oauthConfig.Client(context.Background(), token)
+	resp, err := client.Get("https://api.github.com/user")
+	if err != nil {
+		global.Logger.Errorf("Get user info error: %v", err)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to get user info"})
+		return
+	}
+	defer resp.Body.Close()
+
+	var userInfo map[string]interface{}
+	if err = json.NewDecoder(resp.Body).Decode(&userInfo); err != nil {
+		global.Logger.Errorf("Decode error: %v", err)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to parse user info"})
+		return
+	}
+	emailI := userInfo["email"]
+	emailStr := emailI.(string)
+	usernameI := userInfo["name"]
+	username := usernameI.(string)
+	pathI := userInfo["login"]
+	path := pathI.(string)
+	// 判断是否存在，登陆或者注册
+	userRegisterDTO := &model.UserRegisterDTO{Username: username, Email: emailStr, Password: util.RandomString(8), Path: path}
+	if userRegisterDTO.IsEmailExist() {
+		// 返回 Token 进行登陆
+		user := userRegisterDTO.GetUser()
+		claims := jwt.NewClaims(user.Id, user.Username, user.Path)
+		myToken, err := jwt.NewJwtToken(claims)
+		if err != nil {
+			global.Logger.Error("Error creating token: ", err)
+			c.JSON(http.StatusUnauthorized, result.InvalidJwtToken)
+		} else {
+			ipAddress := c.ClientIP()
+			dua := &model.Dau{UserId: user.Id, UserIp: ipAddress}
+			dua.Add()
+			c.HTML(200, "main/index.html", gin.H{"token": myToken})
+		}
+	} else {
+		// 注册后再登陆
+		// Set encrypt password
+		hashPass, err := encrypt.HashPassword(userRegisterDTO.Password)
+		if err != nil {
+			global.Logger.Errorf("err: %v", err)
+		}
+		userRegisterDTO.Password = hashPass
+
+		// Add User
+		lastId := userRegisterDTO.Add()
+
+		// Dir work
+		wd, err := os.Getwd()
+		if err != nil {
+			global.Logger.Errorf("Failed to get working directory err: %v", err)
+		}
+
+		folderPath := filepath.Join(wd, "storage/todolist/"+lastId)
+		folderPath2 := filepath.Join(wd, "storage/blog/"+lastId)
+		err = os.MkdirAll(folderPath, 0755)
+		err2 := os.MkdirAll(folderPath2, 0755)
+		if err != nil || err2 != nil {
+			global.Logger.Errorf("Error creating directories: %v", err)
+		}
+
+		// Add to WorldGroup
+		groupMembers := &model.GroupMembers{GroupId: "1", UserId: lastId, Status: "0"}
+		groupMembers.Add()
+
+		// 返回 Token 进行登陆
+		claims := jwt.NewClaims(lastId, username, path)
+		myToken, err := jwt.NewJwtToken(claims)
+		if err != nil {
+			global.Logger.Error("Error creating token: ", err)
+			c.JSON(http.StatusUnauthorized, result.InvalidJwtToken)
+		} else {
+			ipAddress := c.ClientIP()
+			dua := &model.Dau{UserId: lastId, UserIp: ipAddress}
+			dua.Add()
+			c.HTML(200, "main/index.html", gin.H{"token": myToken})
+		}
 	}
 }
 
